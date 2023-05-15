@@ -1,0 +1,7 @@
+---
+all:
+  children:
+    juniper_routers:
+      hosts:
+        R1:
+          ansible_host: "192.168.104.101"
