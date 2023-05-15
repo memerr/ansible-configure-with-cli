@@ -2,29 +2,35 @@
 ###------------------------------------------------------
 ### CONFIGURE DEVICE WITH SPECIFIC COMMANDS IN SET FORMAT
 ###------------------------------------------------------
-- name: Configure device with a specific commands in set mode
-  hosts: juniper_routers
+- name: Configure device with a specific commands in set fashion
+  hosts: juniper_routers          # subset of devices in inventory file
   connection: local
   gather_facts: no
   collections:
     - juniper.device
+
+  vars_files:
+    - ../auth-vars.yaml
+
+  vars:
+    user: "{{ admin_username }}"
+    passwd: "{{ admin_password }}"
+
+  # vars:
+  #  user: "username"
+  #  passwd: "password"
+  #  timeout: "240"
   
   tasks:
 
-    - name: "====SEND CONFIGURATION TO A NETWORK DEVICE===="
-      config: # CALL FOR A ANSIBLE MODULE
-
-        # connection parameters
-        user: "tomaszkot"
-        passwd: "12wasko3"
-        timeout: "240"
+    - name: "Send configuration to a node"
+      config: # Call for an ansible module config in juniper.device collection
 
         # declare type of operation, command format and rollback timout
         load: merge
         format: 'set'
-        #confirmed: 10
-        confirm: 10
-        check_commit_wait: 10
+        confirm: 3
+        check_commit_wait: 5
         # CLI comands to send
         lines:
           - 'set system host-name R1'
@@ -37,8 +43,12 @@
       
       # store the output in an object called "result"
       register: result
+    
+    - name: "Final commit if there is still access to a device"
+      config: # Call for an ansible module config in juniper.device collection
+        commit: True
 
-    - name: "====PRINT THE RESULT TO A CONSOLE===="
+    - name: "Print the result to a console"
       # if there was any output from the change above thenprint the result to screen
       debug:
         var: result.diff_lines
