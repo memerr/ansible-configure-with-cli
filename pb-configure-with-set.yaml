@@ -34,7 +34,6 @@
         # CLI comands to send
         lines:
           - 'set system host-name R1'
-          - 'set system services netconf ssh'
           - 'set system time-zone Europe/Warsaw'
           - 'set system name-server 8.8.8.8'
           - 'set interfaces lo0.0 family inet address 1.1.1.1/32'
