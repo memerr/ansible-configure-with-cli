@@ -1,7 +1,4 @@
 Configure Juniper network devices with set commands
-<<<<<<< HEAD
-
-=======
 ===========
 
 Prerequisits:
@@ -79,4 +76,3 @@ or
 ```sh
 ansible-playbook pb-configure-with-set.yaml
 ```
->>>>>>> 98541f042418b3dfbf2af319a570fa038bf3aa5d
