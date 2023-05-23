@@ -72,7 +72,9 @@ or
 
 - You can use ssh keys/provider parameter when using Juniper.junos role - https://www.juniper.net/documentation/us/en/software/junos-ansible/ansible/topics/topic-map/junos-ansible-authenticating-users.html#task-juniper-junos-modules-provider-parameter
 
-2. Running a play:
+2. Specify the specific commands to add to the device configuration in the "lines" section.
+
+3. Run a play:
 ```sh
 ansible-playbook pb-configure-with-set.yaml
 ```
